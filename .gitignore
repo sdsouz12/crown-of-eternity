@@ -1,0 +1,28 @@
+# Unity generated
+[Ll]ibrary/
+[Tt]emp/
+[Bb]uilds?/
+[Ll]ogs/
+[Mm]emoryCaptures/
+[Pp]ackages/com.unity.collab-proxy/
+Obj/
+
+# IDE files
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+
+# OS generated
+.DS_Store
+Thumbs.db
