@@ -26,3 +26,19 @@ Obj/
 # OS generated
 .DS_Store
 Thumbs.db
+
+
+# Visual Studio cache
+.vs/
+
+# Unity specific
+Library/
+Temp/
+Obj/
+Build/
+Logs/
+UserSettings/
+
+# OS specific
+.DS_Store
+Thumbs.db
