@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Player_AiredState : EntityState
+public class Player_AiredState : PlayerState
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public Player_AiredState(Player player, StateMachine stateMachine, string animBoolName) : base(player, stateMachine, animBoolName)
