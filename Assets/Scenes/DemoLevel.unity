@@ -239,7 +239,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   groundCheck: {fileID: 1079624914}
-  wallDetected: 0
+  wallCheck: {fileID: 0}
   battleMoveSpeed: 3
   attackDistance: 2
   battleTimeDuration: 5
@@ -1078,7 +1078,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   groundCheck: {fileID: 1487398534}
-  wallDetected: 0
+  wallCheck: {fileID: 0}
   attackVelocity: []
   attackVelocityDuration: 0.1
   comboResetTime: 1
@@ -58331,7 +58331,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   groundCheck: {fileID: 1961312001}
-  wallDetected: 0
+  wallCheck: {fileID: 0}
   battleMoveSpeed: 3
   attackDistance: 2
   battleTimeDuration: 5

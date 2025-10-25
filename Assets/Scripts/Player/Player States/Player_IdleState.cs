@@ -1,4 +1,3 @@
-using UnityEngine;
 
 public class Player_IdleState : Player_GroundedState
 {
@@ -9,7 +8,6 @@ public class Player_IdleState : Player_GroundedState
     public override void Update()
     {
         base.Update();
-        Debug.Log("[IdleState] Enter - zeroing horizontal velocity");
 
         if (player.moveInput.x != 0)
             stateMachine.ChangeState(player.moveState);

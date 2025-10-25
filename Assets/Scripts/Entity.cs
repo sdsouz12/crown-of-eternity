@@ -17,8 +17,7 @@ public class Entity : MonoBehaviour
     [SerializeField] protected LayerMask whatIsGround;
     [SerializeField] private Transform groundCheck;
     public bool groundDetected { get; private set; }
-    public bool wallDetected;
-
+   public bool wallDetected { get; private set; }
     protected virtual void Awake()
     {
         anim = GetComponentInChildren<Animator>();
@@ -70,7 +69,7 @@ public class Entity : MonoBehaviour
         facingDir = facingDir * -1;
     }
 
-    private void HandleCollisionDetection()
+ private void HandleCollisionDetection()
     {
         groundDetected = Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, whatIsGround);
         wallDetected = Physics2D.Raycast(transform.position, Vector2.right * facingDir, wallCheckDistance, whatIsGround);
