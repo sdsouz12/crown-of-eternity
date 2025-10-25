@@ -1,7 +1,12 @@
+using System;
 using UnityEngine;
+
 
 public class Player : Entity
 {
+
+    public static event Action OnPlayerDeath;
+
     public PlayerInputSet input { get; private set; }
     public Player_IdleState idleState { get; private set; }
     public Player_MoveState moveState { get; private set; }
@@ -11,7 +16,7 @@ public class Player : Entity
     public Player_WallJumpState wallJumpState { get; private set; }
     public Player_DashState dashState { get; private set; }
     public Player_BasicAttackState basicAttackState { get; private set; }
-
+    public Player_DeadState deadState  { get; private set; }
     [Header("Attack details")]
     public Vector2[] attackVelocity;
     public float attackVelocityDuration = .1f;
@@ -45,6 +50,7 @@ public class Player : Entity
         wallJumpState = new Player_WallJumpState(this, stateMachine, "jumpFall");
         dashState = new Player_DashState(this, stateMachine, "dash");
         basicAttackState = new Player_BasicAttackState(this, stateMachine, "basicAttack");
+        deadState = new Player_DeadState(this, stateMachine,"dead");
     }
 
     protected override void Start()
@@ -53,10 +59,18 @@ public class Player : Entity
         stateMachine.Initialize(idleState);
     }
 
+
+     public override void EntityDeath()
+    {
+        base.EntityDeath();
+
+        OnPlayerDeath?.Invoke();
+        stateMachine.ChangeState(deadState);
+    }
+
     private void OnEnable()
     {
         input.Enable();
-
 
         input.Player.Movement.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
         input.Player.Movement.canceled += ctx => moveInput = Vector2.zero;
