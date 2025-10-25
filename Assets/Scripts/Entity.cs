@@ -42,6 +42,13 @@ public class Entity : MonoBehaviour
     {
         stateMachine.currentState.AnimationTrigger();
     }
+
+    
+    public virtual void EntityDeath()
+    {
+
+    }
+    
     public void SetVelocity(float xVelocity, float yVelocity)
     {
         rb.linearVelocity = new Vector2(xVelocity, yVelocity);
