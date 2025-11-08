@@ -4,9 +4,9 @@ public class Enemy_Health : Entity_Health
 {
     private Enemy enemy => GetComponent<Enemy>();
 
-    public override void TakeDamage(float damage, Transform damageDealer)
+    public override void TakeDamage(float damage, float elementalDamage, Transform damageDealer)
     {
-        base.TakeDamage(damage, damageDealer);
+        base.TakeDamage(damage, elementalDamage, damageDealer);
 
         if (isDead)
             return;
