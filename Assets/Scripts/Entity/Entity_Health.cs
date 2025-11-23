@@ -40,8 +40,15 @@ public class Entity_Health : MonoBehaviour , IDamgable
             return;
         }
 
-        Entity_Stats attackerStats = damageDealer.GetComponent<Entity_Stats>();
-        float armorReduction = attackerStats != null ? attackerStats.GetArmorReduction() : 0;
+        Entity_Stats attackerStats = null;
+        float armorReduction = 0;
+
+        if (damageDealer != null)
+        {
+            attackerStats = damageDealer.GetComponent<Entity_Stats>();
+            if (attackerStats != null)
+                armorReduction = attackerStats.GetArmorReduction();
+        }
 
         float mitigation = entityStats.GetArmorMitigation(armorReduction);
         float finalDamage = damage * (1 - mitigation);
@@ -53,7 +60,6 @@ public class Entity_Health : MonoBehaviour , IDamgable
     }
 
     
-
     private bool AttackEvaded() => Random.Range(0f, 100f) < entityStats.GetEvasion();
 
     private void RegenerateHealth()
