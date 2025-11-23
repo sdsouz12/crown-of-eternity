@@ -1,4 +1,3 @@
-using UnityEngine;
 
 public class Player_IdleState : Player_GroundedState
 {

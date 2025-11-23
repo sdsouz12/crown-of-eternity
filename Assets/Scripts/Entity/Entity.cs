@@ -1,7 +1,10 @@
+using System;
 using UnityEngine;
 
 public class Entity : MonoBehaviour
 {
+    public event Action OnFlipped;
+
     public Animator anim { get; private set; }
     public Rigidbody2D rb { get; private set; }
 
@@ -17,8 +20,7 @@ public class Entity : MonoBehaviour
     [SerializeField] protected LayerMask whatIsGround;
     [SerializeField] private Transform groundCheck;
     public bool groundDetected { get; private set; }
-    public bool wallDetected;
-
+   public bool wallDetected { get; private set; }
     protected virtual void Awake()
     {
         anim = GetComponentInChildren<Animator>();
@@ -42,6 +44,13 @@ public class Entity : MonoBehaviour
     {
         stateMachine.currentState.AnimationTrigger();
     }
+
+    
+    public virtual void EntityDeath()
+    {
+
+    }
+    
     public void SetVelocity(float xVelocity, float yVelocity)
     {
         rb.linearVelocity = new Vector2(xVelocity, yVelocity);
@@ -61,9 +70,11 @@ public class Entity : MonoBehaviour
         transform.Rotate(0, 180, 0);
         facingRight = !facingRight;
         facingDir = facingDir * -1;
+
+        OnFlipped?.Invoke();
     }
 
-    private void HandleCollisionDetection()
+ private void HandleCollisionDetection()
     {
         groundDetected = Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, whatIsGround);
         wallDetected = Physics2D.Raycast(transform.position, Vector2.right * facingDir, wallCheckDistance, whatIsGround);
