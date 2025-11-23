@@ -13,10 +13,15 @@ public class TrapDamage : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
+        if (!collision.CompareTag("Player"))
+            return;
+
         if (Time.time < lastDamageTime + damageInterval)
             return;
 
         IDamgable damagable = collision.GetComponent<IDamgable>();
+        if (!collision.CompareTag("Player"))
+            return;
 
         if (damagable != null)
         {

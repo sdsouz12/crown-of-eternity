@@ -28,6 +28,8 @@ public class SpearTrapDamage : MonoBehaviour
             return;
 
         IDamgable dmg = collision.GetComponent<IDamgable>();
+        if (!collision.CompareTag("Player"))
+            return;
         if (dmg != null)
         {
             dmg.TakeDamage(damageAmount, 0f, null);

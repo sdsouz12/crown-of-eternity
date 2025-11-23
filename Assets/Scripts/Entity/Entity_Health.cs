@@ -14,10 +14,13 @@ public class Entity_Health : MonoBehaviour , IDamgable
     [Header("Health Regen")]
     [SerializeField] private float regenInterval = 1;
     [SerializeField] private bool canRegenerateHealth = true;
+    private Renderer rend;
 
 
     protected virtual void Awake()
     {
+        rend = GetComponentInChildren<Renderer>();
+
         entityVfx = GetComponent<Entity_VFX>();
         entity = GetComponent<Entity>();
         entityStats = GetComponent<Entity_Stats>();
@@ -105,6 +108,10 @@ public class Entity_Health : MonoBehaviour , IDamgable
     {
         if(healthBar == null)
             return;
+
+        if (rend != null && !rend.isVisible)
+            return; // skip UI update
+
         healthBar.value = currentHealth / entityStats.GetMaxHealth();
     }
         

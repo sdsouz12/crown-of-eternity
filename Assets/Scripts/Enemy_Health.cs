@@ -11,7 +11,11 @@ public class Enemy_Health : Entity_Health
         if (isDead)
             return;
 
-        if(damageDealer.GetComponent<Player>() != null)
-            enemy.TryEnterBattleState(damageDealer);
+        if (damageDealer != null)
+        {
+            Player p = damageDealer.GetComponent<Player>();
+            if (p != null)
+                enemy.TryEnterBattleState(damageDealer);
+        }
     }
 }
