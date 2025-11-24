@@ -14,10 +14,13 @@ public class Entity_Health : MonoBehaviour , IDamgable
     [Header("Health Regen")]
     [SerializeField] private float regenInterval = 1;
     [SerializeField] private bool canRegenerateHealth = true;
+    private Renderer rend;
 
 
     protected virtual void Awake()
     {
+        rend = GetComponentInChildren<Renderer>();
+
         entityVfx = GetComponent<Entity_VFX>();
         entity = GetComponent<Entity>();
         entityStats = GetComponent<Entity_Stats>();
@@ -40,8 +43,15 @@ public class Entity_Health : MonoBehaviour , IDamgable
             return;
         }
 
-        Entity_Stats attackerStats = damageDealer.GetComponent<Entity_Stats>();
-        float armorReduction = attackerStats != null ? attackerStats.GetArmorReduction() : 0;
+        Entity_Stats attackerStats = null;
+        float armorReduction = 0;
+
+        if (damageDealer != null)
+        {
+            attackerStats = damageDealer.GetComponent<Entity_Stats>();
+            if (attackerStats != null)
+                armorReduction = attackerStats.GetArmorReduction();
+        }
 
         float mitigation = entityStats.GetArmorMitigation(armorReduction);
         float finalDamage = damage * (1 - mitigation);
@@ -53,7 +63,6 @@ public class Entity_Health : MonoBehaviour , IDamgable
     }
 
     
-
     private bool AttackEvaded() => Random.Range(0f, 100f) < entityStats.GetEvasion();
 
     private void RegenerateHealth()
@@ -99,6 +108,10 @@ public class Entity_Health : MonoBehaviour , IDamgable
     {
         if(healthBar == null)
             return;
+
+        if (rend != null && !rend.isVisible)
+            return; // skip UI update
+
         healthBar.value = currentHealth / entityStats.GetMaxHealth();
     }
         
